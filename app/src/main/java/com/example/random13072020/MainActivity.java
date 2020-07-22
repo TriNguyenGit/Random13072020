@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -12,11 +14,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        int value = tinhTong(5,10);
-        Log.d("BBB" ,String.valueOf(value));
+        Random random = new Random();
+        int value = random.nextInt(6);
+        Log.d("BBB", value + " ");
     }
-    private int tinhTong(int a , int b){
-        int ketqua = a + b;
-        return ketqua;
-    }
+
 }
