@@ -10,15 +10,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
     //global
     EditText mEditSomin, mEditSomax;
-    Button mBtnRanDom;
+    Button mBtnRanDom, mBtnAddRange,mBtnReset;
     TextView mTvKetQua;
     String mValue;
+    Random mRandom;
+    int mRandomValue = 0;
+    ArrayList<Integer> mArrayRange;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
          mEditSomax = findViewById(R.id.edittextSomax);
          mEditSomin = findViewById(R.id.edittextSomin);
          mTvKetQua = findViewById(R.id.textviewKetqua);
+         mBtnAddRange = findViewById(R.id.buttonRange);
+         mBtnReset = findViewById(R.id.buttonReset);
          mBtnRanDom.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
@@ -51,15 +57,36 @@ public class MainActivity extends AppCompatActivity {
                 int sMin = Integer.parseInt(textSmin);
                 int sMax = Integer.parseInt(textSmax);
                 if(sMin >= sMax){
-                    sMax = sMin+1;
+                    sMax = sMin + 1;
                 }
+                 // Add range
+                 if (mArrayRange.size() >0){
+                     mArrayRange.clear();
+                 }
+                 for (int i = sMin; i <= sMax ; i++) {
+                     mArrayRange.add(i);
+                 }
+
+                 Log.d("BBB",mArrayRange.size() + "");
+
                // Hien thi
                  Random random = new Random();
-                int value = random.nextInt(sMax - sMin + 1) +sMin;
-                mValue = mValue + m
+                 int value = random.nextInt(sMax - sMin + 1) + sMin;
+                 mValue = mValue + value + " - ";
+                 mRandomValue = mRandom.nextInt(sMax - sMin + 1) + sMin;
+                 mValue = mValue + mRandomValue + " - ";
+                 mTvKetQua.setText(mValue);
              }
          });
 
+        ArrayList<String> arrayName = new ArrayList<>();
+        // Thêm
+        arrayName.add("Nguyen Van Ti"); //vị trí thứ 0
+        arrayName.add("Nguyen Van Teo"); //vị trí thứ 1
+        //Cập nhật
+        arrayName.set(1,"Nguyen Van Tuan");
+        //Xóa
+        arrayName.remove(0);
     }
 
 }
